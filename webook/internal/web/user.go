@@ -52,6 +52,7 @@ func (h *UserHandler) SignUp(ctx *gin.Context) {
 		ConfirmPassword string `json:"confirmPassword"`
 	}
 
+	// 从 HTTP 请求中解析用户注册请求的数据，并将其绑定到 SignUpReq 结构体中
 	var req SignUpReq
 	if err := ctx.Bind(&req); err != nil {
 		return
@@ -101,10 +102,13 @@ func (h *UserHandler) Login(ctx *gin.Context) {
 		Email    string `json:"email"`
 		Password string `json:"password"`
 	}
+
+	// JSON中解析用户登录请求的数据，并将其绑定到 Req 结构体中
 	var req Req
 	if err := ctx.Bind(&req); err != nil {
 		return
 	}
+
 	u, err := h.svc.Login(ctx, req.Email, req.Password)
 	switch err {
 	case nil:

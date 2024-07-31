@@ -36,6 +36,7 @@ func (repo *UserRepository) FindByEmail(ctx context.Context, email string) (doma
 	return repo.toDomain(u), nil
 }
 
+// 根据UserRepository参数 初始化User
 func (repo *UserRepository) toDomain(u dao.User) domain.User {
 	return domain.User{
 		Id:       u.Id,
