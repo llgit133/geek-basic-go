@@ -23,6 +23,7 @@ func NewUserService(repo *repository.UserRepository) *UserService {
 	}
 }
 
+// 用户注册的逻辑
 func (svc *UserService) Signup(ctx context.Context, u domain.User) error {
 	hash, err := bcrypt.GenerateFromPassword([]byte(u.Password), bcrypt.DefaultCost)
 	if err != nil {
@@ -32,6 +33,7 @@ func (svc *UserService) Signup(ctx context.Context, u domain.User) error {
 	return svc.repo.Create(ctx, u)
 }
 
+// 用户登录的逻辑
 func (svc *UserService) Login(ctx context.Context, email string, password string) (domain.User, error) {
 	u, err := svc.repo.FindByEmail(ctx, email)
 	if err == repository.ErrUserNotFound {
